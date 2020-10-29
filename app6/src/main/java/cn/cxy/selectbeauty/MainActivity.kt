@@ -35,6 +35,34 @@ class MainActivity : AppCompatActivity() {
         queryData()
     }
 
+    private fun queryData() {
+        val networkService = getNetworkService()
+        GlobalScope.launch(Dispatchers.Main) {
+            val result = withContext(Dispatchers.IO) { networkService.query() }
+            result.forEach { addImageViewByUrl(it.url) }
+        }
+    }
+
+    private fun addImageViewByUrl(url: String) {
+        val imageView = ImageView(this)
+        imageView.setPadding(dp2px(5))
+        Glide.with(this).load(url).into(imageView)
+        val layoutParams = LinearLayout.LayoutParams(dp2px(100), dp2px(100))
+        layoutParams.setMargins(dp2px(10), dp2px(10), dp2px(10), dp2px(10))
+        flowLayout.addView(imageView, layoutParams)
+    }
+
+    private fun getNetworkService(): NetworkService {
+        val okHttpClient = OkHttpClient.Builder().build()
+        val retrofit = Retrofit.Builder()
+            .client(okHttpClient)
+            .baseUrl("https://gitee.com/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        return retrofit.create(NetworkService::class.java)
+    }
+
     private fun initListeners() {
         button.setOnClickListener {
             if (button.text != "停") {
@@ -104,37 +132,8 @@ class MainActivity : AppCompatActivity() {
         view.setBackgroundColor(Color.parseColor("#FFFFFF"))
     }
 
-    private fun queryData() {
-        val networkService = getNetworkService()
-        GlobalScope.launch(Dispatchers.Main) {
-            val result = withContext(Dispatchers.IO) { networkService.query() }
-            result.forEach { addNewViewByUrl(it.url) }
-        }
-    }
 
-    private fun addNewViewByUrl(url: String) {
-        val imageView = ImageView(this)
-        imageView.setPadding(dp2px(5))
-        Glide.with(this).load(url).into(imageView)
-        val layoutParams = LinearLayout.LayoutParams(dp2px(100), dp2px(100))
-        layoutParams.setMargins(dp2px(10), dp2px(10), dp2px(10), dp2px(10))
-        flowLayout.addView(imageView, layoutParams)
-    }
+    private fun dp2px(dp: Int) =
+        TypedValue.applyDimension(1, dp.toFloat(), resources.displayMetrics).toInt()
 
-    fun dp2px(dp: Int): Int {
-        val metrics = resources.displayMetrics
-        return TypedValue.applyDimension(1, dp.toFloat(), metrics).toInt()
-    }
-
-
-    fun getNetworkService(): NetworkService {
-        val okHttpClient = OkHttpClient.Builder().build()
-        val retrofit = Retrofit.Builder()
-            .client(okHttpClient)
-            .baseUrl("https://gitee.com/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        return retrofit.create(NetworkService::class.java)
-    }
 }
