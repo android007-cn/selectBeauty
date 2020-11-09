@@ -1,14 +1,9 @@
 package cn.cxy.selectbeauty
 
-import android.content.ContentValues
-import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.TypedValue
 import android.view.View
 import android.view.View.GONE
@@ -31,10 +26,8 @@ import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.File
 import java.util.*
 import kotlin.concurrent.fixedRateTimer
-
 
 class MainActivity : AppCompatActivity() {
     private val REQUEST_CODE = 10000
