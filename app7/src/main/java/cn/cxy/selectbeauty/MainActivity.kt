@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
             false
         }
         button.setOnClickListener {
-            if (button.text != "停") {
+            if (button.text != getString(R.string.stop)) {
                 countDownTv.visibility = VISIBLE
                 countDownTv.setCallback(object : OnFinishCallback {
                     override fun onFinished() {
@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 })
 
-                button.text = "停"
+                button.text = getString(R.string.stop)
             } else {
                 stopTimer()
                 button.visibility = GONE

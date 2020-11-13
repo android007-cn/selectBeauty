@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">SelectBeauty</string>
     <string name="select">Go</string>
+    <string name="stop">Stop</string>
 </resources>

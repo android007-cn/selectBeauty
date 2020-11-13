@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">翻牌子</string>
     <string name="select">翻</string>
+    <string name="stop">停</string>
 </resources>
