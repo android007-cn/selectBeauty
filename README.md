@@ -6,7 +6,7 @@ Select one image from a series in random
 3. change background color of image
 4. show image with animation
 # Screenshot
-![](https://img-blog.csdnimg.cn/img_convert/68a91f226f62b4519166d797779dc6c5.gif)
+![](https://raw.githubusercontent.com/android007-cn/selectBeauty/master/screenshots/screenshot.gif)
 # Key Points
 1. Coroutines: make asynchronous operations
 2. Retrofit: fetch data from network
